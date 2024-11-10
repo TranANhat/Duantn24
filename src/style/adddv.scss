@@ -1,0 +1,51 @@
+.add {
+    h2 {
+        font-size: 1.5em;
+        color: #493628;
+        margin-bottom: 15px;
+    }
+
+    .text {
+        margin: 10px 0;
+
+        .text-dv {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+
+
+
+        }
+
+        input[type="text"],
+        input[type="file"],
+        input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 10px 15px;
+        background-color: #493628;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+
+        &:hover {
+            background-color: #AB886D;
+        }
+    }
+}

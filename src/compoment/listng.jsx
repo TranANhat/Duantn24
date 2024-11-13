@@ -1,10 +1,43 @@
 import '../style/listnd.scss'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 
 
 function ListND() {
+    const [user, setUser] = useState([])
 
+    async function GetAllUsr() {
+        try {
+            const res = await axios.get(`http://localhost:3000/api/user/users`);
+            setUser(res.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    useEffect(() => {
+        GetAllUsr()
+    }, [])
+
+
+
+    async function HandleDeleteUser(id) {
+        try {
+            const res = await axios.delete(`http://localhost:3000/api/user/users/${id}`);
+            setUser(res.data)
+            alert("Xóa thành công")
+        } catch (error) {
+            if (error.response) {
+                console.error("API error:", error.response.status, error.response.data.message);
+                alert(error.response.data.message);
+            } else {
+                console.error("Network error:", error.message);
+                alert("Lỗi mạng. Vui lòng thử lại.");
+            }
+        }
+    }
 
     return (
         <>
@@ -22,45 +55,25 @@ function ListND() {
                             <th>Địa chỉ</th>
                             <th>Hành Động</th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Huỳnh Đức Hoàng</td>
-                            <td>hoandhdpd8407@fpt.edu.vn</td>
-                            <td>0934521954</td>
-                            <td>Nguyễn Đình Tứ</td>
+                        {user.map((users) => (
+                            <tr key={users.id}>
+                                <td>{users.id}</td>
+                                <td>{users.username}</td>
+                                <td>{users.email}</td>
+                                <td>{users.phone}</td>
+                                <td>{users.diaChi}</td>
 
-                            <td>
-                                <button>Xóa</button>
-                                <button>Sửa</button>
-                            </td>
+                                <td>
+                                    <button onClick={() => (HandleDeleteUser(users.id))}>Xóa</button>
+                                    <button>Sửa</button>
+                                </td>
 
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Huỳnh Đức Hoàng</td>
-                            <td>hoandhdpd8407@fpt.edu.vn</td>
-                            <td>0934521954</td>
-                            <td>Nguyễn Đình Tứ</td>
+                            </tr>
 
-                            <td>
-                                <button>Xóa</button>
-                                <button>Sửa</button>
-                            </td>
 
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Huỳnh Đức Hoàng</td>
-                            <td>hoandhdpd8407@fpt.edu.vn</td>
-                            <td>0934521954</td>
-                            <td>Nguyễn Đình Tứ</td>
+                        ))}
 
-                            <td>
-                                <button>Xóa</button>
-                                <button>Sửa</button>
-                            </td>
 
-                        </tr>
 
                     </table>
 

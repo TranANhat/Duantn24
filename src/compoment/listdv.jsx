@@ -3,8 +3,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ADD from './adddv';
+import axios from 'axios';
 
 const style = {
     position: 'absolute',
@@ -22,6 +23,38 @@ function ListDV() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const [error, setError] = useState(null);
+    const [dichvulist, setdichvulist] = useState([])
+
+
+
+    async function handledichvu() {
+        try {
+            const res = await axios.get(`http://localhost:3000/api/dv/dichvu`);
+            setdichvulist(res.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        handledichvu();
+    }, [])
+
+    async function handleDeletedichvu(id) {
+        try {
+            const res = await axios.delete(`http://localhost:3000/api/dv/dichvu/${id}`);
+            setdichvulist(res.data)
+            alert("Xóa thành công")
+            window.location.reload()
+        } catch (error) {
+            if (error.response) {
+                console.error("API error:", error.response.data.message);
+                alert(error.response.data.message);
+            } else {
+                console.error("Network error:", error.message);
+            }
+        }
+    }
     return (
         <>
             <section className="list-dv">
@@ -38,71 +71,25 @@ function ListDV() {
                             <th>Giá</th>
                             <th>Hành động</th>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>IMG</td>
-                            <td>Massager</td>
-                            <td>dáhdasdhaksjdaskjd</td>
-                            <td>Giá : 10.000.VNĐ</td>
+                        {dichvulist.map((dv) => (
+                            <tr key={dv.id}>
+                                <td>{dv.id}</td>
+                                <td> <img src={`http://localhost:3000${dv.hinhanh}`} alt="Service Image" /></td>
+                                <td>{dv.tenDichVu}</td>
+                                <td>{dv.moTa}</td>
+                                <td>Giá : {dv.gia} VNĐ</td>
 
-                            <td>
-                                <button>Xóa</button>
-                                <button>Sửa</button>
-                            </td>
+                                <td>
+                                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                                    <button onClick={() => handleDeletedichvu(dv.id)}>Xóa</button>
+                                    <button>Sửa</button>
+                                </td>
 
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>IMG</td>
-                            <td>Massager</td>
-                            <td>dáhdasdhaksjdaskjd</td>
-                            <td>Giá : 10.000.VNĐ</td>
+                            </tr>
 
-                            <td>
-                                <button>Xóa</button>
-                                <button>Sửa</button>
-                            </td>
+                        ))}
 
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>IMG</td>
-                            <td>Massager</td>
-                            <td>dáhdasdhaksjdaskjd</td>
-                            <td>Giá : 10.000.VNĐ</td>
 
-                            <td>
-                                <button>Xóa</button>
-                                <button>Sửa</button>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>IMG</td>
-                            <td>Massager</td>
-                            <td>dáhdasdhaksjdaskjd</td>
-                            <td>Giá : 10.000.VNĐ</td>
-
-                            <td>
-                                <button>Xóa</button>
-                                <button>Sửa</button>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>IMG</td>
-                            <td>Massager</td>
-                            <td>dáhdasdhaksjdaskjd</td>
-                            <td>Giá : 10.000.VNĐ</td>
-
-                            <td>
-                                <button >Xóa</button>
-                                <button >Sửa</button>
-                            </td>
-
-                        </tr>
 
                     </table>
 

@@ -12,3 +12,67 @@ body {
 a {
   text-decoration: none;
 }
+
+.box {
+  width: 300px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  margin-left: 20px;
+  border-bottom: 1px solid black;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.sbox {
+  width: 100%;
+  height: auto;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.stext {
+  border: none;
+  background: none;
+  outline: none;
+  color: #555;
+  font-size: 15px;
+  padding: 0 10px;
+  line-height: 40px;
+  width: 0;
+  transition: width 0.4s ease;
+  flex-grow: 1;
+
+
+}
+
+.sbutton {
+
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  transition: 0.4s;
+
+
+}
+
+.sbutton:hover {
+
+  color: white;
+
+  .MuiSvgIcon-root {
+
+    color: #AB886D;
+  }
+}

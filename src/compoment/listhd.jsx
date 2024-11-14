@@ -107,7 +107,34 @@ function ListHd() {
 
                         ))}
 
+                        <tr >
+                            <td>1</td>
+                            <td>Hoàng</td>
+                            <td>Đang xác nhận</td>
+                            <td>10000000</td>
+                            <td>Tiền mặt</td>
+                            <td>
 
+                                <Button className='btn-ct' onClick={handleOpenDetail}>Chi tiết hóa đơn</Button>
+                                <Modal
+                                    open={openDetailModal}
+                                    onClose={handleCloseDetail}
+                                    aria-labelledby="modal-modal-title"
+                                    aria-describedby="modal-modal-description"
+                                >
+                                    <Box className="box" sx={stylect}>
+                                        <CTHD />
+                                    </Box>
+
+                                </Modal>
+                            </td>
+
+                            <td>
+                                <button>Xóa</button>
+                                <button>Sửa</button>
+                            </td>
+
+                        </tr>
 
                     </table>
 

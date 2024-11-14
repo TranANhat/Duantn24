@@ -26,12 +26,12 @@ function ListND() {
     async function HandleDeleteUser(id) {
         try {
             const res = await axios.delete(`http://localhost:3000/api/user/users/${id}`);
-            setUser(res.data)
+
             alert("Xóa thành công")
         } catch (error) {
             if (error.response) {
                 console.error("API error:", error.response.status, error.response.data.message);
-                alert(error.response.data.message);
+                alert(`Lỗi: ${error.response.data.message || "Không thể xóa người dùng"}`);
             } else {
                 console.error("Network error:", error.message);
                 alert("Lỗi mạng. Vui lòng thử lại.");

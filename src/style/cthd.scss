@@ -1,20 +1,23 @@
-.cthd {
-    position: relative;
+.box-ct {
+    background-color: rgba(255, 255, 255, 0.8);
     width: 100%;
+    display: block;
 
-    .main {
-        position: relative;
+    .main-ct {
+        position: absolute;
+        width: 100%;
+        bottom: -30px;
 
         table {
             border-collapse: collapse;
-            width: 100%;
+            width: 90%;
             color: #333;
             font-family: Arial, sans-serif;
             font-size: 14px;
-
+            text-align: center;
             overflow: hidden;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-
+            margin: 50px;
 
             th {
                 background-color: #493628;
@@ -33,9 +36,25 @@
                 td {
                     background-color: #fff;
                     padding: 10px;
-                    text-align: center;
                     border-bottom: 1px solid #ccc;
                     font-weight: bold;
+
+                    .btn-ct {
+                        margin-top: 20px;
+                        padding: 10px 15px;
+                        background-color: transparent;
+                        color: blue;
+                        border: none;
+                        font-size: 13px;
+                        text-decoration: underline;
+                        cursor: pointer;
+                        transition: 0.3s ease-in-out;
+
+                    }
+
+                    .btn-ct:hover {
+                        color: rgb(119, 119, 218);
+                    }
 
                     button {
                         padding: 5px 10px;
@@ -66,6 +85,7 @@
             cursor: pointer;
             transition: 0.3s ease-in-out;
             margin-left: 50px;
+
 
 
         }

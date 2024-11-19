@@ -6,6 +6,9 @@ import Modal from '@mui/material/Modal';
 import React, { useEffect, useState } from 'react';
 import ADD from './adddv';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const style = {
     position: 'absolute',
@@ -27,7 +30,7 @@ function ListDV() {
     const [error, setError] = useState(null);
     const [dichvulist, setdichvulist] = useState([])
 
-
+    const notifySuccess = () => toast.success('Xóa sản phẩm thành công!');
 
     async function handledichvu() {
         try {
@@ -44,9 +47,10 @@ function ListDV() {
     async function handleDeletedichvu(id) {
         try {
             const res = await axios.delete(`http://localhost:3000/api/dv/dichvu/${id}`);
-            setdichvulist(res.data)
-            alert("Xóa thành công")
-            window.location.reload()
+            console.log('Service deleted', res.data);
+            notifySuccess()
+            handledichvu();
+
         } catch (error) {
             if (error.response) {
                 console.error("API error:", error.response.data.message);
@@ -82,7 +86,7 @@ function ListDV() {
 
                                 <td>
                                     {error && <p style={{ color: 'red' }}>{error}</p>}
-                                    <button onClick={() => handleDeletedichvu(dv.id)}>Xóa</button>
+                                    <button className='delete-btn' onClick={() => handleDeletedichvu(dv.id)}>Xóa</button>
                                     <button>Sửa</button>
                                 </td>
 
@@ -94,6 +98,8 @@ function ListDV() {
 
                     </table>
 
+
+
                     <Button className='btn' onClick={handleOpen}>Thêm dịch vụ</Button>
                     <Modal
                         open={open}
@@ -102,10 +108,18 @@ function ListDV() {
                         aria-describedby="modal-modal-description"
                     >
                         <Box className="box" sx={style}>
-                            <ADD />
+                            <ADD onAddSuccess={handledichvu} />
                         </Box>
                     </Modal>
-
+                    <ToastContainer
+                        position="top-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        closeOnClick
+                        pauseOnHover
+                        draggable
+                        theme="colored"
+                    />
                 </div>
 
             </section>

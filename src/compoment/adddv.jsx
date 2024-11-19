@@ -1,15 +1,28 @@
 import { useState } from 'react';
 import '../style/adddv.scss'
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function ADD() {
+function ADD({ onAddSuccess }) {
 
     const [tendichvu, setTendichvu] = useState('');
     const [mota, setMota] = useState('')
     const [gia, setGia] = useState('')
     const [img, setImg] = useState(null)
 
+
+    const notifySuccess = () => toast.success('Thêm sản phẩm thành công!');
+    const notifyError = () => toast.error('Có lỗi xảy ra. Vui lòng thử lại.');
+    const notifyErrorAdd = () => toast.error('Vui lòng nhập đầy đủ thông tin trước khi thêm sản phẩm.');
+
+
     async function handledaddichvu() {
+
+        if (!tendichvu || !mota || !gia || !img) {
+            notifyErrorAdd()
+            return;
+        }
         try {
             const formData = new FormData();
             formData.append("tenDichVu", tendichvu);
@@ -25,9 +38,14 @@ function ADD() {
             setGia('')
             setMota('')
             setImg(null)
-            alert('Thêm thành công')
-            window.location.reload()
+
+            notifySuccess()
+            onAddSuccess()
+
+
         } catch (error) {
+
+            notifyError()
             console.log(error);
         }
     }
@@ -68,6 +86,8 @@ function ADD() {
                 <button onClick={handledaddichvu}>Thêm sản phẩm</button>
 
             </div>
+
+
         </>
     )
 }

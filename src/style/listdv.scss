@@ -37,6 +37,14 @@
                     border-bottom: 1px solid #ccc;
                     font-weight: bold;
 
+                    .delete-btn {
+                        background-color: #ff9800; // Màu cam cho nút xóa
+
+                        &:hover {
+                            background-color: #f57c00;
+                        }
+                    }
+
                     img {
                         width: 150px;
                         height: 100px;

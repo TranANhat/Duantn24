@@ -13,7 +13,7 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    height: 400,
+    height: 500,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -25,9 +25,41 @@ function ListDV() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [error, setError] = useState(null);
-    const [dichvulist, setdichvulist] = useState([])
+    const [openDetailModal, setOpenDetailModal] = useState(false);
+    const [dichvulist, setdichvulist] = useState([]);
+    const [updatedichvu,Setupdatedichvu] = useState(null)
+    const [formState, setFormState] = useState({ tenDichVu: '', moTa: '', gia: '' });
 
 
+
+
+    const handleOpenDetail = (id) => {
+        const service = dichvulist.find(dv => dv.id === id);
+        if (service) {
+            Setupdatedichvu(service);
+            setFormState(service);
+            setOpenDetailModal(true);
+        }
+    };
+
+    const handleCloseDetail = () => setOpenDetailModal(false);
+
+    const handleFormChange = (e) => {
+        const { name, value } = e.target;
+        setFormState({ ...formState, [name]: value });
+    };
+
+    async function handleUpdateDichVu() {
+        try {
+            await axios.put(`http://localhost:3000/api/dv/dichvu/${updatedichvu.id}`, formState);
+            alert("Dịch vụ đã được cập nhật thành công");
+            handledichvu(); // Refresh the list
+            handleCloseDetail(); // Close the modal
+        } catch (error) {
+            console.error("Lỗi khi cập nhật dịch vụ:", error);
+            alert("Không thể cập nhật dịch vụ");
+        }
+    }
 
     async function handledichvu() {
         try {
@@ -83,7 +115,7 @@ function ListDV() {
                                 <td>
                                     {error && <p style={{ color: 'red' }}>{error}</p>}
                                     <button onClick={() => handleDeletedichvu(dv.id)}>Xóa</button>
-                                    <button>Sửa</button>
+                                    <button onClick={()=> handleOpenDetail(dv.id)}>Sửa</button>
                                 </td>
 
                             </tr>
@@ -103,6 +135,23 @@ function ListDV() {
                     >
                         <Box className="box" sx={style}>
                             <ADD />
+                        </Box>
+                    </Modal>
+
+
+                    <Modal open={openDetailModal} onClose={handleCloseDetail} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+                        <Box className="box" sx={style}>
+                            <h1>Chỉnh sửa</h1>
+                            <form>
+                                <label>Tên dịch vụ:</label>
+                                <input name="tenDichVu" value={formState.tenDichVu} onChange={handleFormChange} />
+                                <label>Mô tả:</label>
+                                <input name="moTa" value={formState.moTa} onChange={handleFormChange} />
+                                <label>Giá:</label>
+                                <input name="gia" type="number" value={formState.gia} onChange={handleFormChange} />
+                                <button type="button" onClick={handleUpdateDichVu}>Lưu</button>
+                                <button type="button" onClick={handleCloseDetail}>Hủy</button>
+                            </form>
                         </Box>
                     </Modal>
 

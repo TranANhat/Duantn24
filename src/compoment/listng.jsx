@@ -69,19 +69,7 @@ function ListND() {
 
 
                         ))}
-                        <tr >
-                            <td>1</td>
-                            <td>Hoàng</td>
-                            <td>hoang@gmail.com</td>
-                            <td>0123456789</td>
-                            <td>123 abc</td>
-
-                            <td>
-                                <button onClick={() => (HandleDeleteUser(users.id))}>Xóa</button>
-                                <button>Sửa</button>
-                            </td>
-
-                        </tr>
+                     
 
 
 

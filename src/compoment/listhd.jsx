@@ -2,7 +2,7 @@ import '../style/listhd.scss'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import ADDHD from './addhd';
 import '../style/cthd.scss';

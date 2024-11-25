@@ -23,7 +23,7 @@ const style = {
 const stylect = {
     position: 'absolute',
     top: '50%',
-    left: '50%',
+    left: '55%',
     transform: 'translate(-50%, -50%)',
     width: 1000,
     height: 190,
@@ -48,11 +48,16 @@ function ListHd() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-
+    // Trạng thái hóa đơn
     async function updateHoadonStatus(id, newStatus) {
         try {
             await axios.put(`http://localhost:3000/api/hd/hoadon/${id}/status`, { trangThai: newStatus });
             handledHoadon();
+            setHoadonlist((prevList) =>
+                prevList.map((hd) =>
+                    hd.id === id ? { ...hd, trangThai: newStatus } : hd
+                )
+            );
         } catch (error) {
             console.log("Lỗi khi cập nhật trạng thái:", error);
         }
@@ -115,7 +120,9 @@ function ListHd() {
                                 <tr key={hd.id}>
                                     <td>{hd.id}</td>
                                     <td>{hd.tenKhachHang}</td>
-                                    <td>{hd.trangThai}</td>
+                                    <td className={`status ${hd.trangThai === "Đã xác nhận" ? "confirmed" : hd.trangThai === "Đã hủy" ? "canceled" : ""}`}>
+                                        {hd.trangThai}
+                                    </td>
                                     <td>{hd.phuongThucThanhToan}</td>
                                     <td className="cthd">
                                         <Button className="btn-ct" onClick={() => handleOpenDetail(hd.id)}>
@@ -123,9 +130,13 @@ function ListHd() {
                                         </Button>
                                     </td>
                                     <td>
-                                        <button onClick={() => updateHoadonStatus(hd.id, "Đã xác nhận")}>Xác nhận</button>
-                                        <button onClick={() => updateHoadonStatus(hd.id, "Đã hủy")}>Hủy</button>
-                                        <button onClick={() => handleDeleteHoaDon(hd.id)}>Xóa</button>
+                                        {hd.trangThai !== "Đã xác nhận" && (
+                                            <button className="confirm-btn" onClick={() => updateHoadonStatus(hd.id, "Đã xác nhận")}>Xác nhận</button>
+                                        )}
+                                        {hd.trangThai !== "Đã hủy" && (
+                                            <button className="cancel-btn" onClick={() => updateHoadonStatus(hd.id, "Đã hủy")}>Hủy</button>
+                                        )}
+                                        <button className='delete-btn' onClick={() => handleDeleteHoaDon(hd.id)}>Xóa</button>
                                         <button>Sửa</button>
                                     </td>
                                 </tr>

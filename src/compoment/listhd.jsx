@@ -7,6 +7,10 @@ import axios from 'axios';
 import ADDHD from './addhd';
 import '../style/cthd.scss';
 
+import { format } from 'date-fns';
+
+
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -99,7 +103,11 @@ function ListHd() {
         handledHoadon();
     }, []);
 
+    
+
+
     return (
+        
         <>
             <section className="list-hd">
                 <div className="main">
@@ -108,8 +116,9 @@ function ListHd() {
                             <tr>
                                 <th>id</th>
                                 <th>Tên khách hàng</th>
+                                <th>Ngày hẹn</th>
                                 <th>Trạng thái</th>
-
+                                <th>Tổng tiền</th>
                                 <th>Phương thức thanh toán</th>
                                 <th>Chi tiết hóa đơn</th>
                                 <th>Hành động</th>
@@ -120,9 +129,11 @@ function ListHd() {
                                 <tr key={hd.id}>
                                     <td>{hd.id}</td>
                                     <td>{hd.tenKhachHang}</td>
+                                    <td>{format(new Date(hd.ngayHen), 'dd/MM/yyyy')}</td>
                                     <td className={`status ${hd.trangThai === "Đã xác nhận" ? "confirmed" : hd.trangThai === "Đã hủy" ? "canceled" : ""}`}>
                                         {hd.trangThai}
                                     </td>
+                                    <td>{hd.tongTien}</td>
                                     <td>{hd.phuongThucThanhToan}</td>
                                     <td className="cthd">
                                         <Button className="btn-ct" onClick={() => handleOpenDetail(hd.id)}>

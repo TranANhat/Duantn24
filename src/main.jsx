@@ -11,10 +11,20 @@ import Home from './compoment/home.jsx';
 import DichVu from './compoment/dichvu.jsx';
 import User from './compoment/nguoidung.jsx';
 import HoaDon from './compoment/hoadon.jsx';
-import MKM from './compoment/mkm.jsx';
+import DangNhap from './compoment/dangnhap.jsx';
+import DangKy from './compoment/dangky.jsx';
+import FeedbackList from './compoment/listfeddback.jsx';
+import KhuyenMai from './compoment/khuyenmai.jsx';
 
 const router = createBrowserRouter([
-
+  {
+    path: '/dangky',
+    element: <DangKy />
+   },
+  {
+  path: '/dangnhap',
+  element: <DangNhap />
+   },
   {
     path: '/',
     element: <App />,
@@ -37,7 +47,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/khuyenmai',
-        element: <MKM />
+        element: <KhuyenMai/>
+      },
+      {
+        path: '/danhgia',
+        element: <FeedbackList />
       },
 
     ]

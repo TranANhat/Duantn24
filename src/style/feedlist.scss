@@ -1,0 +1,179 @@
+.list-feedback {
+    position: relative;
+    width: 100%;
+
+    .main {
+        position: relative;
+        margin-left: 280px;
+
+        table {
+            border-collapse: collapse;
+            width: 90%;
+            color: #333;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            text-align: center;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+            
+            table-layout: fixed; /* Cố định kích thước cột */
+            word-wrap: break-word; /* Cắt từ dài xuống dòng khi quá chiều rộng */
+            max-height: 500px; /* Cố định chiều cao bảng */
+            overflow-y: auto; /* Nếu dữ liệu vượt quá chiều cao thì có thanh cuộn dọc */
+
+            th {
+                background-color: #493628;
+                color: #fff;
+                font-weight: bold;
+                padding: 10px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                border-top: 1px solid #fff;
+                border-bottom: 1px solid #ccc;
+            }
+
+            tr {
+
+                &:hover {
+                    background-color: #f2f2f2; // Hiệu ứng hover cho hàng
+                }
+
+                td {
+                    padding: 10px;
+                    border-bottom: 1px solid #ccc;
+                    text-overflow: ellipsis; /* Đảm bảo văn bản dài sẽ được cắt bớt */
+                    overflow: hidden; /* Ẩn bớt phần văn bản dài */
+                    white-space: nowrap; /* Ngăn văn bản xuống dòng */
+
+                    .btn-detail {
+                        background-color: transparent;
+                        color: blue;
+                        border: none;
+                        font-size: 13px;
+                        text-decoration: underline;
+                        cursor: pointer;
+                        transition: 0.3s ease-in-out;
+
+                        &:hover {
+                            color: rgb(119, 119, 218);
+                        }
+                    }
+
+                    button {
+                        padding: 5px 10px;
+                        margin: 5px;
+                        font-weight: bold;
+                        background-color: #ccc;
+                        border: 1px solid #ccc;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        transition: 0.3s ease-in-out;
+
+                        &:hover {
+                            background-color: transparent;
+                        }
+                    }
+                }
+            }
+        }
+
+        .btn-add {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #493628;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+            margin-left: 50px;
+
+            &:hover {
+                background-color: #ab886d;
+            }
+        }
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin-top: 20px;
+
+    li {
+        margin: 0 5px;
+
+        .page-link {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+
+        .page-link:hover {
+            background-color: #f4f4f4;
+        }
+
+        &.active .page-link {
+            background-color: #493628;
+            color: #fff;
+            border-color: #493628;
+        }
+    }
+}
+
+.pagination {
+    position: fixed;
+    top: 40%;  
+    right: 0; 
+    transform: translateY(-50%); 
+    display: flex;
+    flex-direction: column;  
+    list-style-type: none;
+    background-color: #000000;  
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    z-index: 1000;
+    height: 300px;
+    font-weight: bold;
+
+    clip-path: polygon(
+        0% 15%,   /* Góc trên bên trái, lùi vào 20% */
+        100% 0%,   /* Góc trên bên phải, lùi vào 20% */
+        100% 100%, /* Góc dưới bên phải */
+        0% 85%   /* Góc dưới bên trái */
+      );
+
+    li {
+        margin: 5px 0;  /* Khoảng cách giữa các nút */
+        
+
+        .page-link {
+            display: block;
+            padding: 8px 10px;
+            border: 1px solid rgb(0, 136, 255);
+            border-radius: 5px;
+            text-align: center;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .page-link:hover {
+            background-color: #f4f4f4;
+            color: black;
+        }
+
+        &.active .page-link {
+            background-color: #4d4d4d;
+            color: #ffffff;
+            border-color: #ff0000;
+        }
+    }
+}

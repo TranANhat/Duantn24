@@ -19,7 +19,7 @@ function User() {
                             className="stext"
                             type="text"
                             name="q"
-                            placeholder="Tìm kiếm bài viết..."
+                            placeholder="Tìm kiếm người dùng..."
                         />
                         <button className="sbutton" type="submit">
                             <SearchIcon />

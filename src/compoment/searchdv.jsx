@@ -16,55 +16,21 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    height: 500,
+    height: 400,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
 };
-function ListDV() {
+function ListSRDV({ load }) {
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [error, setError] = useState(null);
-    const [openDetailModal, setOpenDetailModal] = useState(false);
-    const [dichvulist, setdichvulist] = useState([]);
-    const [updatedichvu, Setupdatedichvu] = useState(null)
-    const [formState, setFormState] = useState({ tenDichVu: '', moTa: '', gia: '' });
+    const [dichvulist, setdichvulist] = useState([])
 
     const notifySuccess = () => toast.success('Xóa sản phẩm thành công!');
-
-    const formatPrice = (price) => {
-        return new Intl.NumberFormat('vi-VN').format(price) + ' đồng';
-    };
-    // const handleOpenDetail = (id) => {
-    //     const service = dichvulist.find(dv => dv.id === id);
-    //     if (service) {
-    //         Setupdatedichvu(service);
-    //         setFormState(service);
-    //         setOpenDetailModal(true);
-    //     }
-    // };
-
-    // const handleCloseDetail = () => setOpenDetailModal(false);
-
-    // const handleFormChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormState({ ...formState, [name]: value });
-    // };
-
-    // async function handleUpdateDichVu() {
-    //     try {
-    //         await axios.put(`http://localhost:3000/api/dv/dichvu/${updatedichvu.id}`, formState);
-    //         alert("Dịch vụ đã được cập nhật thành công");
-    //         handledichvu(); // Refresh the list
-    //         handleCloseDetail(); // Close the modal
-    //     } catch (error) {
-    //         console.error("Lỗi khi cập nhật dịch vụ:", error);
-    //         alert("Không thể cập nhật dịch vụ");
-    //     }
-    // }
 
     async function handledichvu() {
         try {
@@ -94,6 +60,9 @@ function ListDV() {
             }
         }
     }
+    const formatPrice = (price) => {
+        return new Intl.NumberFormat('vi-VN').format(price) + ' đồng';
+    };
     return (
         <>
             <section className="list-dv">
@@ -110,7 +79,7 @@ function ListDV() {
                             <th>Giá</th>
                             <th>Hành động</th>
                         </tr>
-                        {dichvulist.map((dv) => (
+                        {load.map((dv) => (
                             <tr key={dv.id}>
                                 <td>{dv.id}</td>
                                 <td> <img src={`http://localhost:3000${dv.hinhanh}`} alt="Service Image" /></td>
@@ -160,4 +129,4 @@ function ListDV() {
         </>
     )
 }
-export default ListDV
+export default ListSRDV

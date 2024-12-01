@@ -36,12 +36,17 @@ const stylect = {
     boxShadow: 24,
 };
 
+
 function ListHd() {
     const [openDetailModal, setOpenDetailModal] = useState(false);
     const [open, setOpen] = useState(false);
     const [hoadonlist, setHoadonlist] = useState([]);
     const [selectedHoaDon, setSelectedHoaDon] = useState([]);
 
+
+    const formatPrice = (price) => {
+        return new Intl.NumberFormat('vi-VN').format(price) + ' đồng';
+    };
     const handleOpenDetail = (id) => {
         console.log("Opening detail for invoice ID:", id);
         handledCTHoadon(id);
@@ -103,11 +108,11 @@ function ListHd() {
         handledHoadon();
     }, []);
 
-    
+
 
 
     return (
-        
+
         <>
             <section className="list-hd">
                 <div className="main">
@@ -133,7 +138,7 @@ function ListHd() {
                                     <td className={`status ${hd.trangThai === "Đã xác nhận" ? "confirmed" : hd.trangThai === "Đã hủy" ? "canceled" : ""}`}>
                                         {hd.trangThai}
                                     </td>
-                                    <td>{hd.tongTien}</td>
+                                    <td>{formatPrice(hd.tongTien)}</td>
                                     <td>{hd.phuongThucThanhToan}</td>
                                     <td className="cthd">
                                         <Button className="btn-ct" onClick={() => handleOpenDetail(hd.id)}>

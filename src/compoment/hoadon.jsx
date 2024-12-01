@@ -18,7 +18,7 @@ function HoaDon() {
                             className="stext"
                             type="text"
                             name="q"
-                            placeholder="Tìm kiếm bài viết..."
+                            placeholder="Tìm kiếm hóa đơn..."
                         />
                         <button className="sbutton" type="submit">
                             <SearchIcon />

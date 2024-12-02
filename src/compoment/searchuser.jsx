@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 
-function ListND() {
+function ListSearchND({ load }) {
     const [user, setUser] = useState([])
 
     async function GetAllUsr() {
@@ -28,7 +28,7 @@ function ListND() {
 
             const res = await axios.delete(`http://localhost:3000/api/user/users/${id}`);
             console.log('User deleted', res.data);
-            GetAllUsr()
+
         } catch (error) {
             console.error('API error:', error.response ? error.response.data : error);
             alert('Người dùng đang có đơn hàng');
@@ -51,7 +51,7 @@ function ListND() {
                             <th>Địa chỉ</th>
                             <th>Hành Động</th>
                         </tr>
-                        {user.map((users) => (
+                        {load.map((users) => (
                             <tr key={users.id}>
                                 <td>{users.id}</td>
                                 <td>{users.username}</td>
@@ -80,4 +80,4 @@ function ListND() {
         </>
     )
 }
-export default ListND
+export default ListSearchND
